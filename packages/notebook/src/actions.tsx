@@ -417,6 +417,7 @@ export namespace NotebookActions {
    * Insert a new code cell below the active cell or in index 0 if the notebook is empty.
    *
    * @param notebook - The target notebook widget.
+   * @param cellType - The type of the new cell ('code' | 'markdown'). Defaults to 'code'.
    *
    * #### Notes
    * The widget mode will be preserved.
@@ -424,7 +425,10 @@ export namespace NotebookActions {
    * The existing selection will be cleared.
    * The new cell will be the active cell.
    */
-  export function insertBelow(notebook: Notebook): void {
+  export function insertBelow(
+    notebook: Notebook,
+    cellType: 'code' | 'markdown' = 'code'
+  ): void {
     if (!notebook.model) {
       return;
     }
@@ -434,14 +438,11 @@ export namespace NotebookActions {
 
     const newIndex = notebook.activeCell ? notebook.activeCellIndex + 1 : 0;
     model.sharedModel.insertCell(newIndex, {
-      cell_type: notebook.notebookConfig.defaultCell,
-      metadata:
-        notebook.notebookConfig.defaultCell === 'code'
-          ? {
-              // This is an empty cell created by user, thus is trusted
-              trusted: true
-            }
-          : {}
+      cell_type: cellType,
+      metadata: {
+        // This is an empty cell created by user, thus is trusted
+        trusted: true
+      }
     });
     // Make the newly inserted cell active.
     notebook.activeCellIndex = newIndex;

@@ -4,36 +4,64 @@
  */
 
 .jp-Notebook-footer {
-  height: 27px;
-  margin-left: calc(
-    var(--jp-cell-prompt-width) + var(--jp-cell-collapser-width) +
-      var(--jp-cell-padding) + var(--jp-notebook-padding)
-  );
-  width: calc(
-    100% -
-      (
-        var(--jp-cell-prompt-width) + var(--jp-cell-collapser-width) + 2 *
-          var(--jp-cell-padding) + 2 * var(--jp-notebook-padding)
-      )
-  );
-  border: var(--jp-border-width) solid var(--jp-cell-editor-border-color);
-  color: var(--jp-ui-font-color3);
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: var(--jp-layout-color1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  padding: 12px 24px;
+}
+
+.jp-Notebook-footer > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.jp-Notebook-footer button {
   background: none;
+  border: none;
   cursor: pointer;
+  color: var(--jp-ui-font-color1);
+  font-size: 14px;
+  font-weight: 350;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Add vertical space between the icon and the text using gap */
+  gap: 4px;
+
+  /* Set a uniform width so it does not depend on label length */
+  width: 71px;
+  min-height: 48px;
+  border-radius: 4px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
-.jp-Notebook-footer:focus {
-  border-color: var(--jp-cell-editor-active-border-color);
+.jp-Notebook-footer button:hover {
+  background-color: var(--jp-layout-color2);
 }
 
-/* For devices that support hovering, hide footer until hover */
-@media (hover: hover) {
-  .jp-Notebook-footer {
-    opacity: 0;
-  }
+.jp-Notebook-footer button:focus {
+  outline: none;
+  background-color: var(--jp-layout-color2);
+}
 
-  .jp-Notebook-footer:focus,
-  .jp-Notebook-footer:hover {
-    opacity: 1;
-  }
+.jp-Notebook-footer button:active {
+  background-color: var(--jp-layout-color3);
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-Toolbar-separator {
+  display: inline-block;
+  border-left: 1px solid var(--jp-border-color1);
+  margin: 0 8px; /* add horizontal space around the line */
+  height: 32px; /* or adjust to match your toolbar height */
+  vertical-align: middle; /* align the separator nicely with the buttons */
 }
